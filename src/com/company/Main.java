@@ -47,7 +47,7 @@ public class Main {
             tableMap.put(tableValues.date, recordsList);
         }
 
-        values.sort(Comparator.comparing(TableValues::getDate).thenComparing(TableValues::getTime));
+        //values.sort(Comparator.comparing(TableValues::getDate).thenComparing(TableValues::getTime));
         HashMap<LocalDate, List<TableValues>> sortedMap = tableMap.entrySet()
                 .stream()
                 .sorted(HashMap.Entry.comparingByKey())
