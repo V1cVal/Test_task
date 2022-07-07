@@ -3,13 +3,13 @@ package com.company;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class TableValues {
-    String day;
-    LocalDate date;
-    String subject;
-    LocalTime time;
-    String teacher;
-    String cabinet;
+public final class TableValues {
+    private String day;
+    private LocalDate date;
+    private String subject;
+    private LocalTime time;
+    private String teacher;
+    private String cabinet;
 
     public String getDay(){
         return day;
@@ -51,15 +51,6 @@ public class TableValues {
     }
     public void setCabinet(String cabinet) {
         this.cabinet = cabinet;
-    }
-
-    public String tableValueToString(TableValues value) {
-        return value.day + ";" +
-                value.date + ";" +
-                value.subject + ";" +
-                value.time + ";" +
-                value.teacher + ";" +
-                value.cabinet;
     }
 }
 

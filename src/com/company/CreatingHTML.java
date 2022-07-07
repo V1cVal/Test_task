@@ -14,7 +14,7 @@ import java.util.*;
 
 public class CreatingHTML {
 
-    public StringBuffer TableCreation(HashMap<LocalDate, List<TableValues>> tableMap) {
+    public final StringBuffer TableCreation(HashMap<LocalDate, List<TableValues>> tableMap) {
         StringBuffer table = new StringBuffer();
         table.append("<table border=\"1\" width=\"600\">" + System.lineSeparator());
         table.append("<tbody>" + System.lineSeparator());
@@ -29,17 +29,17 @@ public class CreatingHTML {
 
         tableMap.forEach((k, v) -> {
             table.append("<tr>" + System.lineSeparator());
-            table.append("<td rowspan=\"" + v.size() + "\">" + v.get(0).date + "</td>" + System.lineSeparator());
-            table.append("<td rowspan=\"" + v.size() + "\">" + v.get(0).day + "</td>" + System.lineSeparator());
+            table.append("<td rowspan=\"" + v.size() + "\">" + v.get(0).getDate() + "</td>" + System.lineSeparator());
+            table.append("<td rowspan=\"" + v.size() + "\">" + v.get(0).getDay() + "</td>" + System.lineSeparator());
             for(int i = 0; i < v.size(); i++) {
                 TableValues values = v.get(i);
                 if (i != 0) {
                     table.append("<tr>" + System.lineSeparator());
                 }
-                table.append("<td>" + values.subject + "</td>" + System.lineSeparator());
-                table.append("<td>" + values.time + "</td>" + System.lineSeparator());
-                table.append("<td>" + values.teacher + "</td>" + System.lineSeparator());
-                table.append("<td>" + values.cabinet + "</td>" + System.lineSeparator());
+                table.append("<td>" + values.getSubject() + "</td>" + System.lineSeparator());
+                table.append("<td>" + values.getTime() + "</td>" + System.lineSeparator());
+                table.append("<td>" + values.getTeacher() + "</td>" + System.lineSeparator());
+                table.append("<td>" + values.getCabinet() + "</td>" + System.lineSeparator());
                 table.append("</tr>" + System.lineSeparator());
             }
         } );

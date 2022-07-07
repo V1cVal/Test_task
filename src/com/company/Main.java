@@ -30,8 +30,10 @@ public class Main {
         CSVReader reader = new CSVReaderBuilder(filereader).withCSVParser(parser).build();
 
         try {
-            recorder = reader.readNext();
-        } finally {}
+            reader.readNext();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         while((recorder = reader.readNext()) != null){
             TableValues tableValues = new TableValues();
             tableValues.setDay(recorder[0]);
@@ -42,12 +44,11 @@ public class Main {
             tableValues.setCabinet((recorder[5]));
             values.add(tableValues);
 
-            List<TableValues> recordsList = tableMap.getOrDefault(tableValues.date, new ArrayList<>());
+            List<TableValues> recordsList = tableMap.getOrDefault(tableValues.getDate(), new ArrayList<>());
             recordsList.add(tableValues);
-            tableMap.put(tableValues.date, recordsList);
+            tableMap.put(tableValues.getDate(), recordsList);
         }
 
-        //values.sort(Comparator.comparing(TableValues::getDate).thenComparing(TableValues::getTime));
         HashMap<LocalDate, List<TableValues>> sortedMap = tableMap.entrySet()
                 .stream()
                 .sorted(HashMap.Entry.comparingByKey())
