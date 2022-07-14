@@ -1,12 +1,6 @@
 package com.company;
 
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.sax.SAXTransformerFactory;
-import javax.xml.transform.sax.TransformerHandler;
-import javax.xml.transform.stream.StreamResult;
+import javax.swing.*;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -50,29 +44,22 @@ public class CreatingHTML {
 
     public void HTMLFileCreation (StringBuffer table) throws FileNotFoundException {
         String encoding = "UTF-8";
-        FileOutputStream fos = new FileOutputStream("Schedule.html");
+
+        JFileChooser fileChoose = new JFileChooser();
+        fileChoose.setFileHidingEnabled(false);
+        String file_Path = null;
+        if (fileChoose.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+            java.io.File file = fileChoose.getSelectedFile();
+            file_Path = file.getPath();
+        }
+
+        FileOutputStream fos = new FileOutputStream(file_Path + ".html");
         OutputStreamWriter writer = null;
         try {
             writer = new OutputStreamWriter(fos, encoding);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        StreamResult streamResult = new StreamResult(writer);
-
-        SAXTransformerFactory saxFactory =
-                (SAXTransformerFactory) TransformerFactory.newInstance();
-        TransformerHandler tHandler = null;
-        try {
-            tHandler = saxFactory.newTransformerHandler();
-        } catch (TransformerConfigurationException e) {
-            e.printStackTrace();
-        }
-        tHandler.setResult(streamResult);
-
-        Transformer transformer = tHandler.getTransformer();
-        transformer.setOutputProperty(OutputKeys.METHOD, "html");
-        transformer.setOutputProperty(OutputKeys.ENCODING, encoding);
-        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
         try {
             writer.write("<!DOCTYPE html>" + System.lineSeparator());
